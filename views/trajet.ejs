@@ -16,7 +16,7 @@
 
 
     <!-- HEADER -->
-    <%- include('navbar'); %>
+    <%- include('navbar', {page: ""}) %>
 
 
    <!-- GRID -->
@@ -33,7 +33,7 @@
               <span name="newcity3"><%=users[i].departure%> / <%=users[i].arrival%> </span>
               <span><%=users[i].departureTime%> </span>
               <span> <%=users[i].price%>€</span>
-              
+
               <a class="btn btn-danger" href="/myticket?departure=<%=users[i].departure%>&arrival=<%=users[i].arrival%>&departureTime=<%=users[i].departureTime%>&price=<%=users[i].price%>&id=<%=users[i]._id%>&date=<%=users[i].date%>" role="button">ok</a>
           </li>
         </form>
