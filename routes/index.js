@@ -59,7 +59,7 @@ router.get('/myticket', async function(req, res, next) {
 
 
   var alreadyExist = false;
-  var iduser = req.session.user
+  var test = req.session.user
   
 
   for(var i=0; i<ticket.length;i++){
@@ -76,7 +76,7 @@ router.get('/myticket', async function(req, res, next) {
       date : req.query.date,
       price: req.query.price,
       id: req.query.id,
-      iduser : iduser.id
+      iduser : test.id
     })
   }
 
@@ -105,7 +105,7 @@ router.get('/historique', async function(req, res, next) {
   var test = req.session.user
   
 
-  cityList = await historique.find({iduser: test.id });
+  historiques = await historique.find({iduser: test.id });
   
 
   for(var i = 0 ; i< ticket.length ; i++){
@@ -113,7 +113,7 @@ router.get('/historique', async function(req, res, next) {
 
 
 
-  res.render('historique', {cityList});
+  res.render('historique', {historiques});
   });
 
 
