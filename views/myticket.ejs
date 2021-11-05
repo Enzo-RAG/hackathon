@@ -27,7 +27,7 @@
       <div class="row">
           <table class="table">
             <thead>
-                <tr>
+                <tr class="bg-light">
                   <th scope="col">N°</th>
                   <th scope="col">journey</th>
                   <th scope="col">date</th>
@@ -38,28 +38,29 @@
                 <tbody>
                     <%var totalCmd = 0%>;
                     <%for( var i =0; i < ticket.length ; i++){%>
-                    <tr class="basket-item">
+                    <tr class="basket-item bg-light">
                         <th scope="row"><%=i%></th>
                         <td><%=ticket[i].departure%> / <%=ticket[i].arrival%> </td>
                         <td><%=dateFormat(ticket[i].date)%></td>
                         <td><%=ticket[i].departureTime%></td>
-                        <td><%=ticket[i].price%></td>
+                        <td><%=ticket[i].price%>€</td>
                     </tr>
                     <% totalCmd = ticket[i].price * 1 + totalCmd
                 } %>
-                    <tr>
+                    <tr style="background-color: #F4C7CC;">
                         <th scope="row">total</th>
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td class="total-box"><%=totalCmd%></td>
+                        <td class="total-box"><%=totalCmd%>€</td>
         
                     </tr>
                 </tbody>
 
            
         </table>
-        <a class="btn btn-primary" href="/historique" role="button">Confirme</a>
+        <%  %>  
+            <a class="btn btn-primary" href="/Homepage" role="button" onclick="confirmationAlert()">Confirme</a>
         </div>
         
           

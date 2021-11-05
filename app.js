@@ -23,8 +23,10 @@ function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-
-
+app.locals.confirmationAlert = function () {
+  var text = 'Confirmation Confirmed'
+  return alert(text)
+}
 
 app.use( 
   session({  
