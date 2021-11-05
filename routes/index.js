@@ -3,12 +3,12 @@ var router = express.Router();
 var request = require('sync-request');
 
 
-var cityModel = require('../models/histo')
+var historique = require('../models/histo')
 var journeys = require('../models/journeys')
-var userModel = require('../models/users')
+
 
 var ticket = []
-var user1 = []
+
 
 
 function capitalizeFirstLetter(string) {
@@ -24,7 +24,7 @@ router.get('/Homepage', async function(req, res, next){
   if(req.session.user == null){
     res.redirect('/')
   } else {
-    var cityList = await cityModel.find();
+    var cityList = await historique.find();
     console.log(req.session.user)
     console.log("babar")
     res.render('Homepage', {cityList})
@@ -92,7 +92,7 @@ router.get('/historique', async function(req, res, next) {
 
 
     for(var i = 0 ; i< ticket.length ; i++){
-      var newCity = new cityModel({     
+      var newCity = new historique({     
       departure: ticket[i].departure,
       arrival: ticket[i].arrival,
       date: ticket[i].date,
@@ -107,7 +107,7 @@ router.get('/historique', async function(req, res, next) {
   var test = req.session.user
   console.log(test.id)
 
-  cityList = await cityModel.find({iduser: test.id });
+  cityList = await historique.find({iduser: test.id });
   console.log(cityList)
 
   for(var i = 0 ; i< ticket.length ; i++){
