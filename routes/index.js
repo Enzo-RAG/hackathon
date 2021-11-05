@@ -25,6 +25,7 @@ router.get('/Homepage', async function(req, res, next){
     var cityList = await cityModel.find();
 
     res.render('Homepage', {cityList})
+  
   }
 });
 
