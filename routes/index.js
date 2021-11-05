@@ -15,11 +15,12 @@ function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-/* GET home page. */
+/* GET login. */
 router.get('/', function(req, res, next) {
   res.render('login');
 });
 
+/* GET home page. */
 router.get('/Homepage', async function(req, res, next){
   if(req.session.user == null){
     res.redirect('/')
@@ -31,11 +32,12 @@ router.get('/Homepage', async function(req, res, next){
   }
 });
 
-
+/* GET errors. */
 router.get('/errors', function(req, res, next) {
   res.render('errors');
 });
 
+/* GET trajet. */
 router.post('/trajet', async function(req, res, next) {
   
   
@@ -52,12 +54,12 @@ router.post('/trajet', async function(req, res, next) {
   res.render('trajet', {users:users})
 });
 
+/* GET myticket. */
 router.get('/myticket', async function(req, res, next) {
 
 
-  
   var alreadyExist = false;
-  var test = req.session.user
+  var iduser = req.session.user
   
 
   for(var i=0; i<ticket.length;i++){
@@ -74,7 +76,7 @@ router.get('/myticket', async function(req, res, next) {
       date : req.query.date,
       price: req.query.price,
       id: req.query.id,
-      iduser : test.id
+      iduser : iduser.id
     })
   }
 
@@ -82,6 +84,7 @@ router.get('/myticket', async function(req, res, next) {
   res.render('myticket', {ticket});
 });
 
+/* GET historique. */
 router.get('/historique', async function(req, res, next) {
 
 
