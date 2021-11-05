@@ -7,6 +7,7 @@ var citySchema = mongoose.Schema({
     departureTime: String,
     price: Number,
     id : String,
+    iduser : String
 })
 
 var cityModel = mongoose.model('histos', citySchema)
