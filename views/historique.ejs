@@ -35,12 +35,12 @@
             </thead>
                 <tbody>
 
-                    <%for(var i = 0 ; i< cityList.length ; i++){%>
+                    <%for(var i = 0 ; i< historiques.length ; i++){%>
                    <tr>
-                    <th scope="col"><%=dateFormat(cityList[i].date)%></th>
-                    <th scope="col"><%=cityList[i].departure%> / <%=cityList[i].arrival%></th>
-                    <th scope="col"><%=cityList[i].departureTime%></th>
-                    <th scope="col"><%=cityList[i].price%></th>
+                    <th scope="col"><%=dateFormat(historiques[i].date)%></th>
+                    <th scope="col"><%=historiques[i].departure%> / <%=historiques[i].arrival%></th>
+                    <th scope="col"><%=historiques[i].departureTime%></th>
+                    <th scope="col"><%=historiques[i].price%></th>
                 </tr> 
                 <%}%>
        

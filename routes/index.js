@@ -24,10 +24,9 @@ router.get('/Homepage', async function(req, res, next){
   if(req.session.user == null){
     res.redirect('/')
   } else {
-    var cityList = await historique.find();
-    console.log(req.session.user)
-    console.log("babar")
-    res.render('Homepage', {cityList})
+    var historiques = await historique.find();
+    
+    res.render('Homepage', {historiques})
   
   }
 });
@@ -40,9 +39,9 @@ router.get('/errors', function(req, res, next) {
 router.post('/trajet', async function(req, res, next) {
   
   
-  var users = await journeys.find({departure: capitalizeFirstLetter(req.body.newcity) , arrival: capitalizeFirstLetter(req.body.newcity2) , date: req.body.date});
-  console.log(users)
-  var searchUser = await journeys.findOne({departure: capitalizeFirstLetter(req.body.newcity) , arrival: capitalizeFirstLetter(req.body.newcity2)})
+  var users = await journeys.find({departure: capitalizeFirstLetter(req.body.departure) , arrival: capitalizeFirstLetter(req.body.arrival) , date: req.body.date});
+  
+  var searchUser = await journeys.findOne({departure: capitalizeFirstLetter(req.body.departure) , arrival: capitalizeFirstLetter(req.body.arrival)})
 
   if(searchUser === null){
     res.render('errors')
@@ -56,12 +55,10 @@ router.post('/trajet', async function(req, res, next) {
 router.get('/myticket', async function(req, res, next) {
 
 
-  console.log(req.query.departure)
+  
   var alreadyExist = false;
   var test = req.session.user
-  console.log(test.id)
-  console.log(req.session.user)
-  console.log("robert de sable")
+  
 
   for(var i=0; i<ticket.length;i++){
     if(req.query.id == ticket[i].id ){
@@ -81,18 +78,16 @@ router.get('/myticket', async function(req, res, next) {
     })
   }
 
-  console.log(ticket)
 
   res.render('myticket', {ticket});
 });
 
 router.get('/historique', async function(req, res, next) {
-  console.log("gg")
-    console.log(req.body.id)
+
 
 
     for(var i = 0 ; i< ticket.length ; i++){
-      var newCity = new historique({     
+      var historiquesave = new historique({     
       departure: ticket[i].departure,
       arrival: ticket[i].arrival,
       date: ticket[i].date,
@@ -101,14 +96,14 @@ router.get('/historique', async function(req, res, next) {
       id : ticket[i].id,
       iduser : ticket[i].iduser
     })
-    await newCity.save();
+    await historiquesave.save();
   };
     
   var test = req.session.user
-  console.log(test.id)
+  
 
   cityList = await historique.find({iduser: test.id });
-  console.log(cityList)
+  
 
   for(var i = 0 ; i< ticket.length ; i++){
     ticket.pop()}
