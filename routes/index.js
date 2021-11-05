@@ -5,8 +5,10 @@ var request = require('sync-request');
 
 var cityModel = require('../models/histo')
 var journeys = require('../models/journeys')
+var userModel = require('../models/users')
 
 var ticket = []
+var user1 = []
 
 
 function capitalizeFirstLetter(string) {
@@ -23,7 +25,8 @@ router.get('/Homepage', async function(req, res, next){
     res.redirect('/')
   } else {
     var cityList = await cityModel.find();
-
+    console.log(req.session.user)
+    console.log("babar")
     res.render('Homepage', {cityList})
   
   }
@@ -50,11 +53,15 @@ router.post('/trajet', async function(req, res, next) {
   res.render('trajet', {users:users})
 });
 
-router.get('/myticket', function(req, res, next) {
+router.get('/myticket', async function(req, res, next) {
 
 
   console.log(req.query.departure)
   var alreadyExist = false;
+  var test = req.session.user
+  console.log(test.id)
+  console.log(req.session.user)
+  console.log("robert de sable")
 
   for(var i=0; i<ticket.length;i++){
     if(req.query.id == ticket[i].id ){
@@ -69,7 +76,8 @@ router.get('/myticket', function(req, res, next) {
       departureTime: req.query.departureTime,
       date : req.query.date,
       price: req.query.price,
-      id: req.query.id
+      id: req.query.id,
+      iduser : test.id
     })
   }
 
@@ -90,14 +98,16 @@ router.get('/historique', async function(req, res, next) {
       date: ticket[i].date,
       departureTime: ticket[i].departureTime,
       price: ticket[i].price,
-      id : ticket[i].id
+      id : ticket[i].id,
+      iduser : ticket[i].iduser
     })
     await newCity.save();
   };
     
-   
+  var test = req.session.user
+  console.log(test.id)
 
-  cityList = await cityModel.find();
+  cityList = await cityModel.find({iduser: test.id });
   console.log(cityList)
 
   for(var i = 0 ; i< ticket.length ; i++){
